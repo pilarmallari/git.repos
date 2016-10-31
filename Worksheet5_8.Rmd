@@ -1,0 +1,251 @@
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE, cache = TRUE) # global
+code chunk knitr options
+```
+
+#Worksheet 5 - Do chapter 3 of online R tutorial http://tryr.codeschool.com/
+
+1. How could you make a matrix that is 5 columns wide and 2 rows deep and that has the value 1 in each cell? 
+
+```{r}
+matrix (1, 2, 5)
+```
+
+2. How could you make a matrix that is 2 wide and 2 deep and that has the values 10, 14, 20 and 30 in it? 
+```{r}
+a <- c(10, 14, 20, 30)
+matrix (a, 2, 2)
+```
+
+3. What does the dim assignment function do to a vector? 
+
+The dim assignment function sets dimensions for a matrix. It accepts a vector with the number of rows and the number of columns to assign.
+
+```
+plank <- 1:8
+dim(plank) <- c(2, 4)
+print (plank)
+
+```
+
+4. This chapter is about matrices. Can you think of data that would come in the form of a matrix? Remember that in a matrix, all cells have the same datatype. 
+
+Statistical data, accounting data, RNA seq data. 
+
+5. You learned three commands to plot a matrix. Which are they? Which one do you think would be most useful? 
+
+elevation map
+elevation <- matrix(1, 10, 10)
+
+elevation[4, 6] <- 0
+
+contour map of the values simply by passing the matrix to the contour function
+contour(elevation)
+
+create a 3D perspective plot with the persp function:
+The perspective plot looks a little odd, though. This is because persp automatically expands the view so that your highest value (the beach surface) is at the very top.
+We can fix that by specifying our own value for the expand parameter.
+persp(elevation, expand=0.2)
+
+ R includes some sample data sets to play around with. One of these is volcano, a 3D map of a dormant New Zealand volcano.
+It's simply an 87x61 matrix with elevation values, but it shows the power of R's matrix visualizations.
+contour(volcano)
+
+persp(volcano, expand=0.2)
+
+The image function will create a heat map:
+image(volcano)
+
+
+
+
+
+
+
+
+
+
+
+**Finished!** 
+
+Name: Pilar Lopez
+
+
+Date:  
+
+***
+
+#Worksheet 6: Do chapter 4 of Try R codeschool 
+
+You can do all the exercises in the online tutorial first, then come back to this worksheet to answer a few questions. 
+
+1. You used about 5 functions in this tutorial.  Write down the functions and how they work. 
+
+The mean function gives you the mean!, example with the limbs vector.
+limbs <- c(4, 3, 4, 3, 2, 4, 4, 4)
+names(limbs) <- c('One-Eye', 'Peg-Leg', 'Smitty', 'Hook', 'Scooter', 'Dan', 'Mikey', 'Blackbeard')
+mean(limbs)
+barplot(limbs)
+
+If we draw a line on the plot representing the mean, we can easily compare the various values to the average. The abline function can take an h parameter with a value at which to draw a horizontal line, or a v parameter for a vertical line. When it's called, it updates the previous plot.
+
+Draw a horizontal line across the plot at the mean:
+abline(h = mean(limbs))
+
+
+The median function The median is calculated by sorting the values and choosing the middle one (for sets with an even number of values, the middle two values are averaged).
+> limbs <- c(4, 3, 4, 3, 2, 4, 4, 14)
+> names(limbs) <- c('One-Eye', 'Peg-Leg', 'Smitty', 'Hook', 
+                    'Scooter', 'Dan', 'Mikey', 'Davy Jones')
+> mean(limbs)
+[1] 4.75
+> barplot(limbs)
+> abline(h = mean(limbs))
+> median(limbs)
+[1] 4
+Draw a horizontal line across the plot at the median.
+> abline(h = median(limbs))
+
+Standard Deviation Function
+> pounds <- c(45000, 50000, 35000, 40000, 35000, 45000, 10000, 15000)
+> barplot(pounds)
+> meanValue <- mean(pounds)
+plot showing the mean value:
+> abline(h = meanValue)
+
+Statisticians use the concept of "standard deviation" from the mean to describe the range of typical values for a data set. For a group of numbers, it shows how much they typically vary from the average value. To calculate the standard deviation, you calculate the mean of the values, then subtract the mean from each number and square the result, then average those squares, and take the square root of that average.
+If that sounds like a lot of work, don't worry. You're using R, and all you have to do is pass a vector to the sd function. Try calling sd on the pounds vector now, and assign the result to the deviation variable 
+> deviation <- sd(pounds)
+add a line on the plot to show one standard deviation above the mean (the top of the normal range).
+> abline(h = meanValue + deviation)
+
+
+
+
+2. Several objects were used in this tutorial. Two of them are vectors - which ones? 
+Which ones were simple "numeric"s? 
+
+
+Limbs was a numerics vector and names was a string vector
+
+> limbs <- c(4, 3, 4, 3, 2, 4, 4, 14)
+> names(limbs) <- c('One-Eye', 'Peg-Leg', 'Smitty', 'Hook', 
+                    'Scooter', 'Dan', 'Mikey', 'Davy Jones')
+
+3. How would you use the function abline to create a horizontal line that crosses the y-axis at 10? And a vertical line that crosses the x-axis at 10?
+
+
+```{r}
+x <- 1:12  
+y <- 1:12  
+plot(x,y)  
+abline(x,y)
+```
+
+
+**Awesome! Another tutorial done!** 
+
+Name: pilar lopez
+
+
+Date:  
+
+***
+
+**Install R and RStudio prior to working on this worksheet**  
+#Worksheet 7 Getting to know Rstudio through videos from Udacity. 
+
+If you are doing this at home, you should first install RStudio. If you are in the computer room, you can start with this worksheet. 
+Rstudio is installed on the computers, find it in the "dock" and start the program. 
+
+**Task 1.** Watch video on Rstudio basics:
+
+https://www.youtube.com/watch?&v=FDSmlIBy7ko
+
+**Task 2.** Watch video on changing the settings of Rstudio (up to 45 seconds). 
+
+https://www.youtube.com/watch?&v=vLlj5nNj8x4
+
+**Task 3.** Change the settings for "appearance" and enjoy the new colors. 
+
+**Task 4.** Watch video on getting help for R
+
+https://www.youtube.com/watch?v=ABVX527RODE
+
+**Task 5.** Go to the quick R website (google quick R or go to http://www.statmethods.net/). Search for information on bar plots. You'll need it for the next task. 
+
+**Task 6.** Create a new R script in Rstudio
+
+Write code to make two numeric vectors of equal length, and plot them in a scatter plot.
+Then plot one of them in a barplot. Make the barplot horizontal. 
+Create a matrix that combines both vectors using rbind(vector1,vector2) and create a barplot of that matrix. 
+
+Save your code in a place on your computer where you can find it back.  
+How to save your code in an R script: https://vimeo.com/142568715
+
+Append/copy your .R code here as a code block i.e. enclosed in 3 backticks, e.g.:
+
+```{r}
+Xvector <- 1:11  
+Yvector <- 11:21  
+plot (Xvector, Yvector, main="Scatterplot")
+```
+
+
+```{r}
+Xvector <- 1:11  
+Yvector <- 11:21  
+barplot (Xvector, Yvector, main="Barplot Horizontal", horiz=TRUE)
+```
+
+```{r}
+Xvector <- 1:11  
+Yvector <- 11:21  
+rbind (Xvector, Yvector)
+barplot (Xvector, Yvector, main="Matrix")
+```
+
+**Doing great!**  
+
+Name: pilar lopez
+
+Date:  
+
+***
+
+#Worksheet 8: Chapter 5 of Try R codeschool 
+
+Chapter 5 is about factors. Nominal data should be stored as factors. 
+The following are examples of data that should be stored as factors: 
+
+1. Gender (male / female / unspecified)
+2. Nationality (e.g., US, Canada, Mexico)
+3. Type of animal (e.g., dog, fish, cat, horse)
+4. Age if range is used (below 40, 40 or older)
+
+The following are examples of data that should not be stored as factors: 
+
+1. Age if years or months are used (numeric)
+2. Height (numeric)
+3. Price (numeric)
+
+**Task 1.** Come up with at least 4 examples of data that should be stored as factors. 
+
+Gene names, taxons, person's health insurance, car plates
+
+
+**Task 2.** Explain all parts of the command 
+`plot(weights, prices, pch=as.integer(types))`
+
+When you do plot(weights, prices) the graph cannot tell wich chest is which by only plotting weigths vs prices. Instead we can convert factors to integers and pass them to the pch argument of plot. The new graph assigned different character to each chest (triangle, plus sign or circle). Now you can tell which weight and price correspond to which chest. So in summary, it gives a different plot characters to different types so you can tell the appart.  
+
+
+
+
+
+
+**On your way to becoming an R ninja!**
+
+Name: pilar lopez
+
+Date:  

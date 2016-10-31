@@ -1,0 +1,269 @@
+#Worksheet 13 Getting started with Git and GitHub
+**Note for Mac users**: you may need to install XCode command-line tools if you haven't already.
+
+You should've already gotten a GitHub account. If you haven't done so yet then do so now.
+
+**NOTE**: for code inserting blocks of git code use the following R markdown syntax:  
+```{bash, eval=FALSE}  
+some code here  
+```  
+...more on R markdown in the next worksheet.
+
+**Task 1** Install & configure git  
+Follow the instructions in install_config_git.pdf
+
+**Task 2** Setup git and make your first repository ("repo")  
+First we'll practice git as if we're starting a project from scratch, and then we'll push (i.e. upload) your worksheets.
+
+Decide where you want to put your git repos. Maybe you want all of them (e.g. for this class and for other things in the same spot) *or* maybe you want them in different spots (say the class ones within the dir for the class and the others in the respective dir for whatever they're for). **I put my git repos in a dir called `git.repos` that sits in my home dir**, so that's the path I'll use as an example: `~/git.repos/`
+
+`cd` to where you want to setup your new repo
+`cd ~/git.repos/`
+
+Make a new dir for your repo and call it `test.repo`    
+`mkdir test.repo`
+
+`cd` into the test.repo dir  
+`cd test.repo/`
+
+`touch test.file` What does this line of code do? [Hint: you can check with `ls`]
+
+Initiliaze a git repo
+
+`git init .` What do you thing the dot `.` is specifying?  
+
+Now you should have a hidden dir `.git` within the test.repo apart from `test.file`. This `.git` dir is your repo. **Let's check!**  
+`ls -la`
+
+Let's check what's in the repo  
+`git status`
+Are any files tracked yet?
+
+Let's **stage** the contents of the dir to the repo  
+`git add .`
+
+Let's check the repo's status again  
+`git status`  
+Are there files/changes to be committed?
+
+Let's make our first **commit**!!
+`git commit -m "First commit, adding test.file"`  
+
+Let's check the repo's status again  
+`git status`
+Tell me in your own words what you think the git status message is teeling you.
+
+Open `test.file` in any text editor (*not* MS Word) and make changes to it
+
+Let's check the repo's status again with `git status`. You can see that there unstaged changes.
+
+Now let's stage and commit the changes
+```
+git add test.file  
+git commit -m "made some changes to test.files"
+```  
+
+**Hurray you committed some changes!**
+
+...now let's push your work to GitHub.
+
+**First, create a new repository on GitHub**  
+Use this guide to create a repo called test.repo:  
+https://help.github.com/articles/creating-a-new-repository/  
+*To avoid errors, do not initialize the new repository with README, license, or gitignore files*. You can add these files after your project has been pushed to GitHub.
+
+Copy the URL of your test.repo in GitHub and use it to add the URL for the remote repo
+`git remote add origin remote/repo/URL/here`  
+By convention/default remote repos are called `origin`, although they can be named anything.
+
+Verify the new remote URL  
+`git remote -v`
+
+Push the changes in your local repo (master) to the remote repo on GitHub  
+`git push -u origin master`
+
+**Way to go!**
+
+**Task 3** Push/upload your answered worksheets to GitHub
+
+If you added your answers into a copy of Worksheet1_4.md that you got from iLearn during our last class, then follow these next few steps. Otherwise, if you cloned the assignment repo *and then* added your answers to Worksheet1_4.md skip these steps.
+
+`cd` to the directory with your *answered* Worksheet1_4.md and .html files.
+
+Initialize a git repo and call it "wkst1-4.answered". Then stage and commit your files. Copy the lines of code you used.
+
+Now, let's clone the GitHub assignment repo for Worksheets 1-4.  
+`cd` to where you want to put the directory for Worksheets 1-4, e.g. either in your git.repos dir or in your clas dir.
+
+Clone remote assignment repo. Copy URL for your class assignment repo.
+`git clone URL/for/class/assignment/repo`  
+This creates a dir named after your assignment, initializes a git repo inside it, pulls down all the data for the remote repo, and checks out a working copy of the latest version.  
+
+Because I don't want to introduce git branches yet, we'll overwrite the *unanswered* copy of Worksheet1\_4.md we just cloned with the *answered* one.  
+Use `cp` to copy the *answered* copy of Worksheet1\_4.md into the cloned repo to overwrite/replace the *unaswered* one.  
+**NOTE:** if you overwrite the file ***without*** first making a git repo and committing the *answered* copy then git would not know that you changed the file and thus your commit history would not reflect the changes in the file.
+
+If you first cloned the assignment repo and then added in your answers, you can rejoin here.
+
+You need to perform 3 steps in order to submit Worksheet1\_4.md to GitHub.
+
+What are those 3 steps called?
+
+Add in the code here that you used to run these 3 steps.
+
+Name: 
+
+Date:
+
+***  
+
+#Worksheet 14 R markdown
+
+Now that you know plain Markdown, let's take it a step further and learn R markdown.
+
+I will provide an introduction to R markdown.
+
+Afterwards, you'll use the R markdown resources from RStudio that are on iLearn to format ACTG306_Tutorial_A.R  ...before you open this R script in RStudio, make a duplicate copy and change its file extension to .Rmd and open this new .Rmd copy. **Only format the tutorial up to and including Task 3**
+
+When you're finished, insert your formatted tutorial into a copy of worksheets\_9\_12 changed to an .Rmd extension.
+
+Name: 
+
+Date:
+
+***  
+
+#Worksheet 15 Do a Swirl tutorial in Rstudio
+
+1. Open Rstudio, install the swirl package using the install.packages() function and then load the swirl package using the library() command. 
+
+2. Open swirl by typing swirl(). When swirl asks you what course you want to do, choose 1: R Programming. 
+Then there will be the choice between 15 different tutorials. Pick one that looks useful to you. I would not start with the apply functions, but any other tutorial is fine. 
+
+3. Make notes here about the most important things you learn in the tutorial you chose: 
+
+Basic Building Blocks
+ 
+ You can combine vectors using c (z is a vector)
+ c(z, 555, z)
+ 
+ Numeric vectors can be used in arithmetic expressions. Type the following to see what
+ happens: z * 2 + 100. First, R multiplied each of the three elements in z by 2. Then it added 100 to each element to get the result you see above.
+ 
+ Other common arithmetic operators are `+`, `-`, `/`, and `^` (where x^2 means 'x squared').
+To take the square root, use the sqrt() function and to take the absolute value, use the
+abs() function.
+ 
+ The spaces on either side of the `/` sign are not required, but
+can often improve readability by making code appear less cluttered. In the end, it's personal preference.
+
+> my_div <- z / my_sqrt
+
+ When given two vectors of the same length, R simply performs the specified arithmetic
+operation (`+`, `-`, `*`, etc.) element-by-element. If the vectors are of different lengths, R 'recycles' the shorter vector until it is the same length as the longer vector.
+
+
+To see another example of how this vector 'recycling' works, try adding c(1, 2, 3, 4) and
+| c(0, 10). Don't worry about saving the result in a new variable.
+
+> c(1, 2, 3, 4) + c(0, 10)
+[1]  1 12  3 14
+
+ In many programming environments, the up arrow will cycle through previous commands. Try
+hitting the up arrow on your keyboard until you get to this command (z * 2 + 100), then
+change 100 to 1000 and hit Enter. If the up arrow doesn't work for you, just type the
+corrected command.
+
+ You can type the first two letters of the variable name, then hit the Tab key (possibly more than once). Most programming environments will provide a list of variables that you've
+created that begin with 'my'. This is called auto-completion and can be quite handy when you
+have many variables in your workspace. Give it a try. (If auto-completion doesn't work for
+you, just type my_div and press Enter.)
+
+
+**Awesome! I hope you like swirl and come back to it later!**
+
+Name:
+
+Date:
+
+***
+  
+#Worksheet 16: Do codeschool TryR chapter 6
+
+1. Why do you think is it more practical to have data in a data.frame then in individual vectors? 
+
+
+Because a data frame is like a database table or an Excel spreadsheet. It has a specific number of columns, each of which is expected to contain values of a particular type. It also has an indeterminate number of rows - sets of related values for each column. You can perform more operations than using vectors.
+
+2. You've learned three ways to extract a column from a data.frame. Which are they? 
+
+data.frame$columnname 
+example: treasure$types
+As a result we get the colum types
+[1] gold   silver gems   gold   gems  
+Levels: gems gold silver
+
+
+data.frame[[index number]]    
+example: treasure[[2]]
+As a result we get the colum corresponding to index 2, which is prices
+[1]  9000  5000 12000  7500 18000
+
+data.frame[["weights"]] where the name of the colum is a string in double-brackets
+example: treasure[["weights"]]
+As a result we retive the data in the colum weights
+[1] 300 200 100 250 150
+
+
+
+3. The read.table() and read.csv() functions are extremely useful. Which are the different arguments for these functions used in the tutorial?
+
+CSV format:
+You can load a CSV file's content into a data frame by passing the file name to the read.csv function. To use the read.csv function and load data, you must write the name of the csv file in double quotes inside the parenthesis. Example: read.csv("targets.csv")
+
+TXT format:
+For files that use separator strings other than commas, you can use the read.table function. The sep argument defines the separator character, and you can specify a tab character with "\t". For example read.table("infantry.txt", sep="\t"). 
+This is the result:
+           V1       V2
+1        Port Infantry
+2 Porto Bello      700
+3   Cartagena      500
+4 Panama City     1500
+5      Havana     2000
+The first line is not automatically treated as column headers with read.table. This behavior is controlled by the header argument. Call read.table again, setting header to TRUE:
+read.table("infantry.txt", sep="\t", header=TRUE)
+This is the result:
+         Port Infantry
+1 Porto Bello      700
+2   Cartagena      500
+3 Panama City     1500
+4      Havana     2000
+
+
+
+**Great. Almost done with all the codeschool stuff!**
+
+Name:
+
+Date:  
+
+***
+
+#Worksheet 17: the last codeschool tutorial 7
+
+1. In this tutorial, you use again read.table() and read.csv(). What is the difference between the two? 
+
+The "piracy.csv" file is in the CSV (Comma Separated Values) format. In this tutorial 7, they are loading the information about software pirates into the existing piracy.cvs data frame: piracy <- read.csv("piracy.csv"). Thus, you use the read.cvs() because this file is a .cvs file.
+
+The "gdp.txt" file is .txt files so you need to use the read.table() function when you are storing this information into a data.frame: gdp <- read.table("gdp.txt", sep="  ", header=TRUE)
+
+2. Write some notes about what you learned in this tutorial here: 
+
+You can use merge to join both data: countries <- merge(x = gdp, y = piracy). Then you can plot the them: plot(countries$GDP, countries$Piracy). You can ask what is the correlation between two vectors with the cor.test function: cor.test(countries$GDP, countries$Piracy). The results show the  "p-value". I also learned that we can get more statitical tools by getting ggplot2: install.packages("ggplot2").
+
+
+**Done with all the codeschool tutorials. Now you are ready for the real stuff!**
+
+Name:
+
+Date:  

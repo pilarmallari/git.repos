@@ -1,0 +1,298 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#Worksheet 9: Work in a group to make a poster 
+**Note**: programming is often done by one person in silence, but a lot of research shows that we learn better when we talk about what we are learning. That's why we do a group activity today. 
+
+1. Pick a random letter between A and D using the `sample()` function. 
+(*hint 1*: first make a vector with the letters A, B, C and D, then pass that vector to `sample()`; *hint 2*: sample() takes two arguments. The first is a vector and the second is the size of the sample you want, in this case 1)
+
+```{r}
+poster <-c("a", "b", "c", "d")
+sample(poster, 1)
+```
+
+2. Your random letter determines what is your topic for today:
+	* A. Functions in R
+	* B. Datatypes in R
+	* C. Plots in R
+	* D. For loops in R
+	
+	I got the letter a, so I will do functions in R
+
+3. Take 5 minutes to write down everything you know about your topic. 
+If you run out of ideas, google your topic to find more. 
+
+
+4. Form a group with the others who have the same topic, and make a "poster" in Markdown format (.md) with the most important concepts you collected together *and append/copy it below*.
+
+
+
+# **Functions** {#anchor}
+
+
+## Definition {#css_id}
+
+Functions are pre installed commands that you can call to perform functions. For example
+
+*Addition* 
+```{r example}
+example <-c(1, 2, 3, 4)
+sum(example)
+
+```
+*Repetition*
+
+```{r}
+rep("hi", times = 3)
+
+```
+*Takes the square root* 
+
+```{r}
+sqrt (16)
+```
+
+*Lists all the files of your current directory*
+
+```{r}
+list.files()
+```
+
+
+
+
+Name:pilar lopez
+
+Date:  
+
+***Yay! I hope you learned something from your colleagues***
+
+*** 
+#Worksheet 10 `ACTG306_Tutorial_A.R`: working with sequence data
+Download the tutorial and go through its steps and tasks.
+
+
+
+#Let's load our sequences and start taking a look at them
+############ CODE
+#load the library seqinr
+```{r}
+library(seqinr)
+```
+
+#read the fasta file
+
+```{r}
+read.fasta("ACTG306_RT_fasta.txt")->SeqData
+```
+#This piece of code is to get more meaningful names for the sequences - instead of just "PtID." Don't worry if it doesn't make much sense. You can execute the entire chunk of code by using the little "chunks" menu on the upper right of this window or by clicking option-command-C. 
+
+```{r}
+annotations<-c();seqnames<-c()
+for (i in 1:length(SeqData)){
+  annot = attr(SeqData[[i]],"Annot")
+  annotations<-c(annotations, annot)
+  patlocstart = regexpr("pat",annot)[1]+3
+  patlocend = regexpr("\\|",substr(annot,patlocstart,patlocstart+10))[1]+patlocstart
+  pat = substr(annot,patlocstart,patlocend-3)
+  weekstart = regexpr("Week",annot)[1]+5
+  week = substr(annot,weekstart,weekstart+10)
+  attr(SeqData[[i]],"name")<-paste("pat_",pat,"_week_",week,sep="")
+  seqnames<-c(seqnames,attr(SeqData[[i]],"name"))
+  }
+  ```
+#This piece of code is to give you an overview of the data we have organized by patient (pat) & week: 
+
+```{r}
+for (i in 1:30){
+    print(attr(SeqData[[i]],"name"))
+    }
+```
+#For which weeks do we have data for patient 29?
+WE HAVE DATA FOR WEEK 0, WEEK 37, WEEK 73, WEEK 79
+
+#The sequences are all from the reverse transcriptase gene of HIV. 
+#We are going to look at a single sequence and use the function "table" 
+#to determine which letters are most common in the sequence. 
+
+############ CODE
+#Look at the first sequence 
+
+```{r}
+SeqData[[1]]
+```
+
+#Use "table" to determine the frequency of all the nucleotides. 
+
+```{r}
+table(SeqData[[1]])
+```
+
+############ TASK 1
+#As you can see, there are other letters than just CTG and A. 
+#Google "ambiguity codes DNA". 
+#Write down the letters from the first sequence and what they mean. 
+#In this case, the "." probably means that the base was not sequenced. 
+
+  .   a   c   g   m   n   r   t   y 
+117 247  99 120   1   3   1 150   3 
+The IUPAC ambiguity code were assigned because the sequence could not really assign a base.
+Thus, Y means a c or a t. An n means it could be any of the a, t, c, g bases. 
+An r means an a or g. 
+
+############ CODE
+#In R, we often run multiple functions on one object at the same time. 
+#For example, I'd like to taburalize SeqData[[1]] and then sort the resulting table. 
+#I could do this in the following way: 
+
+```{r}
+sort(table(SeqData[[1]]))
+```
+
+#To find out more about a function, type ?function 
+?sort
+
+############ TASK 2
+#Which nucleotide is most common in the sequence?
+the most common nucleotide is a with 247.
+
+m   r   n   y   c   .   g   t   a 
+1   1   3   3  99 117 120 150 247
+
+#The package "seqinr" comes with a handy function called "translate". 
+#It translates a DNA sequence into amino acids. 
+
+############ CODE
+
+```{r}
+translate(SeqData[[1]])
+```
+
+############ TASK 3
+#Why does the translation start with a bunch of X's?
+
+the symbol X is used to indicate an amino acid that is completely unidentified
+
+#How many amino acids are in the sequence? 247 amino acids
+
+
+
+
+
+***
+#Worksheet 11 Do a Swirl tutorial in Rstudio
+
+1. Open Rstudio, install the swirl package using the `install.packages()` function and then load the swirl package using the `library()` command. 
+
+2. Open swirl by typing `swirl()`. When swirl asks you what course you want to do, **choose 1: R Programming**. 
+	*	Then there will be the choice between 15 different tutorials. Pick one that looks useful to you. I would not start with the apply functions, but any other tutorial is fine.
+
+3. Make notes here about the most important things you learn in the tutorial you chose: 
+
+ Basic Building Blocks
+ 
+ You can combine vectors using c (z is a vector)
+ c(z, 555, z)
+ 
+ Numeric vectors can be used in arithmetic expressions. Type the following to see what
+ happens: z * 2 + 100. First, R multiplied each of the three elements in z by 2. Then it added 100 to each element to get the result you see above.
+ 
+ Other common arithmetic operators are `+`, `-`, `/`, and `^` (where x^2 means 'x squared').
+To take the square root, use the sqrt() function and to take the absolute value, use the
+abs() function.
+ 
+ The spaces on either side of the `/` sign are not required, but
+can often improve readability by making code appear less cluttered. In the end, it's personal preference.
+
+> my_div <- z / my_sqrt
+
+ When given two vectors of the same length, R simply performs the specified arithmetic
+operation (`+`, `-`, `*`, etc.) element-by-element. If the vectors are of different lengths, R 'recycles' the shorter vector until it is the same length as the longer vector.
+
+
+To see another example of how this vector 'recycling' works, try adding c(1, 2, 3, 4) and
+| c(0, 10). Don't worry about saving the result in a new variable.
+
+> c(1, 2, 3, 4) + c(0, 10)
+[1]  1 12  3 14
+
+ In many programming environments, the up arrow will cycle through previous commands. Try
+hitting the up arrow on your keyboard until you get to this command (z * 2 + 100), then
+change 100 to 1000 and hit Enter. If the up arrow doesn't work for you, just type the
+corrected command.
+
+ You can type the first two letters of the variable name, then hit the Tab key (possibly more than once). Most programming environments will provide a list of variables that you've
+created that begin with 'my'. This is called auto-completion and can be quite handy when you
+have many variables in your workspace. Give it a try. (If auto-completion doesn't work for
+you, just type my_div and press Enter.)
+
+
+
+Awesome! I hope you like swirl and come back to it later!
+
+Name: pilar lopez
+
+Date:
+
+***  
+#Worksheet 12: Do codeschool TryR chapter 6
+
+1. Why do you think is it more practical to have data in a data.frame then in individual vectors? 
+
+Because a data frame is like a database table or an Excel spreadsheet. It has a specific number of columns, each of which is expected to contain values of a particular type. It also has an indeterminate number of rows - sets of related values for each column. You can perform more operations than using vectors.
+
+2. You've learned three ways to extract a column from a data.frame. Which are they? 
+
+data.frame$columnname 
+example: treasure$types
+As a result we get the colum types
+[1] gold   silver gems   gold   gems  
+Levels: gems gold silver
+
+
+data.frame[[index number]]    
+example: treasure[[2]]
+As a result we get the colum corresponding to index 2, which is prices
+[1]  9000  5000 12000  7500 18000
+
+data.frame[["weights"]] where the name of the colum is a string in double-brackets
+example: treasure[["weights"]]
+As a result we retive the data in the colum weights
+[1] 300 200 100 250 150
+
+
+
+3. The `read.table()` and `read.csv()` functions are extremely useful. Which are the different arguments for these functions used in the tutorial?
+
+CSV format:
+You can load a CSV file's content into a data frame by passing the file name to the read.csv function. To use the read.csv function and load data, you must write the name of the csv file in double quotes inside the parenthesis. Example: read.csv("targets.csv")
+
+TXT format:
+For files that use separator strings other than commas, you can use the read.table function. The sep argument defines the separator character, and you can specify a tab character with "\t". For example read.table("infantry.txt", sep="\t"). 
+This is the result:
+           V1       V2
+1        Port Infantry
+2 Porto Bello      700
+3   Cartagena      500
+4 Panama City     1500
+5      Havana     2000
+The first line is not automatically treated as column headers with read.table. This behavior is controlled by the header argument. Call read.table again, setting header to TRUE:
+read.table("infantry.txt", sep="\t", header=TRUE)
+This is the result:
+         Port Infantry
+1 Porto Bello      700
+2   Cartagena      500
+3 Panama City     1500
+4      Havana     2000
+
+
+
+
+
+***Great. Almost done with all the codeschool stuff!***
+
+Name: pilar lopez
+
+Date:  
